@@ -6,6 +6,7 @@ void Main()
 	.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
 	
 	int x = 0, y = 0;		// Coordinates on “odd-q” vertical layout
+	int maxDistance = 0;
 	foreach (var instruction in instructions)
 	{
 		switch (instruction.ToLower())
@@ -47,6 +48,7 @@ void Main()
 			default:
 				throw new ApplicationException("Unknown instruction " + instruction);
 		}
+		maxDistance = Math.Max(maxDistance, ds(x, y));
 	}
 
 	Console.WriteLine($"After run, x = {x} and y {y}");
@@ -55,6 +57,7 @@ void Main()
 	
 	int distance = ds(x, y);
 	Console.WriteLine("Distance: " + distance);
+	Console.WriteLine("Max distance: " + maxDistance);
 }
 
 void cube_to_oddq(int x, int y, int z, out int col, out int row)
